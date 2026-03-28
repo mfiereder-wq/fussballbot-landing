@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Fußball Prognose | KI-gestützte Fußballvorhersagen auf Telegram</title>
+    <meta name="description" content="Professionelle KI-Fußballprognosen auf Telegram. Live-Ergebnisse, detaillierte Statistiken und intelligente Spielanalysen für maximale Trefferquote.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="AI Fußball Prognose | KI-gestützte Fußballvorhersagen auf Telegram">
+    <meta property="og:description" content="Professionelle KI-Fußballprognosen auf Telegram. Live-Ergebnisse, detaillierte Statistiken und intelligente Spielanalysen für maximale Trefferquote.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://aifussballprognose.com">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Fußball Prognose | KI-gestützte Fußballvorhersagen auf Telegram">
+    <meta name="twitter:description" content="Professionelle KI-Fußballprognosen auf Telegram. Live-Ergebnisse, detaillierte Statistiken und intelligente Spielanalysen für maximale Trefferquote.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+    
+    <!-- Critical CSS Inline -->
+    <style>
+        /* CSS Variables - Dark Mode */
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.3);
+            --secondary: #10b981;
+            --secondary-glow: rgba(16, 185, 129, 0.3);
+            --accent: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            
+            --border: #475569;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+            --radius: 1rem;
+            --radius-sm: 0.5rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --telegram: #0088cc;
+            --telegram-dark: #006699;
+            --telegram-glow: rgba(0, 136, 204, 0.3);
+        }
+        
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            letter-spacing: -0.01em;
+        }
+        
+        h3 {
+            font-size: 1.75rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+        
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            padding: 3rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, var(--primary-glow) 0%, transparent 50%),
+                       radial-gradient(circle at 70% 70%, var(--accent-glow) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 20px var(--primary-glow));
+            animation: pulse 2s infinite;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 4rem 2rem;
+            margin: 3rem auto;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px var(--primary-glow);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            margin: 4rem auto;
+            max-width: 900px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, var(--telegram-glow) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulse 3s infinite;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.125rem;
+            min-width: 44px;
+            min-height: 44px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--primary-glow);
+        }
+        
+        .btn-telegram {
+            background: linear-gradient(135deg, var(--telegram), var(--telegram-dark));
+        }
+        
+        .btn-telegram:hover {
+            box-shadow: 0 10px 30px var(--telegram-glow);
+        }
+        
+        .btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.25rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        /* Setup Steps */
+        .setup-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .step {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(30px, 30px) rotate(180deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+        }
+    </style>
+    
+    <!-- Deferred CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="noopener" media="print" onload="this.media='all'">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">⚽🤖</div>
+            <h1>AI Fußball Prognose</h1>
+            <p class="tagline">KI-gestützte Fußballvorhersagen mit wissenschaftlicher Präzision und maximaler Trefferquote</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <p>Genauigkeit bei Live-Ergebnissen</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10K+</div>
+                    <p>Aktive Nutzer</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <p>Echtzeit-Updates</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <p>Unterstützte Ligen</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>Die Zukunft der Fußballanalyse ist da</h2>
+                <p>Unser KI-System analysiert Millionen von Datenpunkten in Echtzeit: Teamform, Spielerstatistiken, Verletzungen, Wetterbedingungen und historische Trends für präzise Vorhersagen.</p>
+                
+                <div class="btn-group">
+                    <a href="https://t.me/Aifussballprognose_bot" class="btn btn-telegram btn-large" target="_blank" rel="noopener">
+                        <i class="fab fa-telegram"></i> Jetzt auf Telegram starten
+                    </a>
+                    <a href="#features" class="btn btn-large">
+                        <i class="fas fa-chart-line"></i> Funktionen entdecken
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="features">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Premium-Funktionen für Profis</h2>
+            
+            <div class="features">
+                <article class="feature-card">
+                    <span class="feature-icon">🤖</span>
+                    <h3>KI-Prognose-Engine</h3>
+                    <p>Maschinelles Lernen analysiert historische Daten, Teamform und Spielerbedingungen für präzise Spielausgänge.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Live-Data Dashboard</h3>
+                    <p>Echtzeit-Statistiken, xG-Werte, Ballbesitz, Schüsse und detaillierte Spielanalysen aller Top-Ligen.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Smart Notifications</h3>
+                    <p>Personalisierte Benachrichtigungen für Tore, Karten, Verletzungen und wichtige Spielereignisse.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <span class="feature-icon">📈</span>
+                    <h3>Profit-Tracking</h3>
+                    <p>Verfolge deine Tipp-Performance mit detaillierten Statistiken und ROI-Berechnungen.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <span class="feature-icon">👥</span>
+                    <h3>Expert-Community</h3>
+                    <p>Tausche dich mit professionellen Tipstern aus und lerne von den Besten der Community.</p>
+                </article>
+                
+                <article class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3>Sichere Transaktionen</h3>
+                    <p>Verschlüsselte Zahlungen und transparente Abrechnung für Premium-Inhalte.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Starte noch heute mit professionellen Fußballprognosen</h2>
+            <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Schließe dich über 10.000 zufriedenen Nutzern an, die ihre Fußballerfahrung revolutioniert haben.
+            </p>
+            
+            <div class="btn-group">
+                <a href="https://t.me/Aifussballprognose_bot" class="btn btn-telegram btn-large" target="_blank" rel="noopener">
+                    <i class="fab fa-telegram"></i> Kostenlos starten
+                </a>
+                <a href="#setup" class="btn btn-large">
+                    <i class="fas fa-play-circle"></i> Demo ansehen
+                </a>
+            </div>
+            
+            <div id="setup" style="margin-top: 4rem;">
+                <h3 style="text-align: center; margin-bottom: 2rem;">📱 In 3 Schritten zum Profi</h3>
+                
+                <div class="setup-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Bot starten</h4>
+                        <p>Klicke auf den Telegram-Button und starte den Chat mit unserem KI-Assistenten.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Konfigurieren</h4>
+                        <p>Wähle deine Lieblingsligen und Teams für personalisierte Benachrichtigungen.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Profitieren</h4>
+                        <p>Erhalte KI-gestützte Prognosen und steigere deine Trefferquote sofort.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="font-size: 2rem; margin-bottom: 1rem;">⚽🤖</div>
+            <h3 style="margin-bottom: 1rem;">AI Fußball Prognose</h3>
+            <p style="margin-bottom: 1.5rem;">Die intelligente Lösung für Fußballanalysen und Prognosen</p>
+            
+            <div class="footer-links">
+                <a href="#">Datenschutz</a>
+                <a href="#">Nutzungsbedingungen</a>
+                <a href="#">Impressum</a>
+                <a href="#">Kontakt</a>
+                <a href="#">FAQ</a>
+            </div>
+            
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+                © 2026 AI Fußball Prognose. Alle Rechte vorbehalten.<br>
+                Diese Seite dient nur zu Informationszwecken.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Deferred JavaScript -->
+    <script>
+        // Progressive enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe feature cards
+            document.querySelectorAll('.feature-card, .stat-card, .step').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Telegram button glow effect
+            const telegramBtn = document.querySelector('.btn-telegram');
+            if(telegramBtn) {
+                setInterval(() => {
+                    telegramBtn.style.boxShadow = `0 0 30px ${Math.random() > 0.5 ? 'var(--telegram-glow)' : 'rgba(0, 136, 204, 0.5)'}`;
+                }, 2000);
+            }
+            
+            // Update stats with animation
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalValue = parseInt(stat.textContent);
+                let currentValue = 0;
+                const increment = finalValue / 50;
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if(currentValue >= finalValue) {
+                        currentValue = finalValue;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(currentValue) + (stat.textContent.includes('%') ? '%' : '+');
+                }, 30);
+            });
+        });
+    </script>
+</body>
+</html>
