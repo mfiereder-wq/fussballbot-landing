@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI FUSSBALL PROGNOSE | TERMINAL MODE</title>
+    <meta name="description" content="KI-Fußballprognosen. Kein Bling. Nur Daten.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI FUSSBALL PROGNOSE | TERMINAL MODE">
+    <meta property="og:description" content="KI-Fußballprognosen. Kein Bling. Nur Daten.">
+    <meta property="og:image" content="https://i.ibb.co/1NxkgBm/1774735167194.png">
+    <meta property="og:url" content="https://t.me/Aifussballprognose_bot">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI FUSSBALL PROGNOSE | TERMINAL MODE">
+    <meta name="twitter:description" content="KI-Fußballprognosen. Kein Bling. Nur Daten.">
+    <meta name="twitter:image" content="https://i.ibb.co/1NxkgBm/1774735167194.png">
+    
+    <!-- Critical CSS -->
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* BRUTAL VARIABLES */
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-90: #0a0a0a;
+            --gray-80: #1a1a1a;
+            --gray-70: #2a2a2a;
+            --gray-60: #3a3a3a;
+            --accent: #00ff88;
+            --accent-glow: rgba(0, 255, 136, 0.3);
+            --terminal-green: #00ff88;
+            --terminal-red: #ff5555;
+            --terminal-yellow: #ffff55;
+            
+            --font-mono: 'Courier Prime', 'IBM Plex Mono', 'Consolas', monospace;
+            --font-size-base: 16px;
+            --line-height: 1.5;
+            
+            --border: 2px solid var(--gray-70);
+            --border-thick: 4px solid var(--gray-70);
+            --border-accent: 2px solid var(--accent);
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+        }
+        
+        /* BASE */
+        body {
+            font-family: var(--font-mono);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height);
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+            border-bottom: var(--border-accent);
+            padding-bottom: var(--spacing-xs);
+            display: inline-block;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-sm);
+            max-width: 65ch;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+        
+        /* LAYOUT */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .section {
+            padding: var(--spacing-xl) 0;
+            border-bottom: var(--border);
+        }
+        
+        .section:last-of-type {
+            border-bottom: none;
+        }
+        
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 49%, var(--accent-glow) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, var(--accent-glow) 50%, transparent 51%);
+            background-size: 20px 20px;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: var(--spacing-lg);
+            border: var(--border-thick);
+            background: var(--gray-90);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-60);
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* TERMINAL COMMAND */
+        .terminal-command {
+            display: inline-block;
+            background: var(--gray-80);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: var(--border);
+            margin: var(--spacing-sm) 0;
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+        }
+        
+        .terminal-command::before {
+            content: '$ ';
+            color: var(--terminal-green);
+        }
+        
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--black);
+            color: var(--accent);
+            border: var(--border-accent);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background: var(--accent);
+            color: var(--black);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        
+        .btn-telegram {
+            background: var(--accent);
+            color: var(--black);
+            font-weight: 700;
+        }
+        
+        .btn-telegram:hover {
+            background: var(--black);
+            color: var(--accent);
+        }
+        
+        /* FEATURES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .feature {
+            border: var(--border);
+            padding: var(--spacing-md);
+            background: var(--gray-90);
+            position: relative;
+        }
+        
+        .feature::before {
+            content: '>';
+            position: absolute;
+            top: var(--spacing-md);
+            left: var(--spacing-sm);
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .feature h3 {
+            padding-left: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .feature p {
+            padding-left: var(--spacing-md);
+            color: var(--gray-60);
+        }
+        
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .stat {
+            text-align: center;
+            border: var(--border);
+            padding: var(--spacing-md);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: var(--spacing-xs);
+            font-family: var(--font-mono);
+        }
+        
+        .stat-label {
+            color: var(--gray-60);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+        
+        /* PRICING */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .price-card {
+            border: var(--border);
+            padding: var(--spacing-md);
+            background: var(--gray-90);
+        }
+        
+        .price-card.featured {
+            border-color: var(--accent);
+            position: relative;
+        }
+        
+        .price-card.featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--black);
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: var(--spacing-sm) 0;
+        }
+        
+        .price-period {
+            color: var(--gray-60);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        /* FOOTER */
+        footer {
+            padding: var(--spacing-lg) 0;
+            border-top: var(--border);
+            text-align: center;
+            color: var(--gray-60);
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            margin-top: var(--spacing-md);
+        }
+        
+        .footer-links a {
+            margin: 0 var(--spacing-sm);
+            color: var(--gray-60);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-content {
+                padding: var(--spacing-md);
+            }
+            
+            .section {
+                padding: var(--spacing-lg) 0;
+            }
+            
+            .features-grid,
+            .stats,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ANIMATIONS */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background: var(--accent);
+            margin-left: 4px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--spacing-lg);
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gray-60);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            animation: blink 2s infinite;
+        }
+    </style>
+    
+    <!-- Deferred CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI FUSSBALL PROGNOSE<span class="cursor"></span></h1>
+            <p class="hero-subtitle">TERMINAL MODE v1.0</p>
+            <p>Kein Bling. Kein Marketing-Geschwätz. Nur Daten.</p>
+            
+            <div class="terminal-command">start --bot --telegram --ai</div>
+            
+            <div style="margin-top: var(--spacing-md);">
+                <a href="https://t.me/Aifussballprognose_bot" class="btn btn-telegram" target="_blank" rel="noopener">
+                    EXECUTE BOT
+                </a>
+                <a href="#features" class="btn" style="margin-left: var(--spacing-sm);">
+                    VIEW SPECS
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">SCROLL ↓</div>
+    </section>
+    
+    <!-- FEATURES -->
+    <section id="features" class="section container">
+        <h2>SYSTEM SPECS</h2>
+        <p>Maschinelles Lernen. Echtzeit-Daten. Keine Kompromisse.</p>
+        
+        <div class="features-grid">
+            <div class="feature">
+                <h3>KI-ENGINE</h3>
+                <p>Neuronale Netze analysieren 10.000+ historische Spiele für präzise Prognosen.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>LIVE DATA STREAM</h3>
+                <p>Echtzeit-Statistiken, xG-Werte, Ballbesitz, Schüsse. 24/7 Updates.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>PROFIT TRACKING</h3>
+                <p>Automatische ROI-Berechnung. Performance-Analyse. Keine Selbsttäuschung.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>EXPERT NETWORK</h3>
+                <p>Zugang zur geschlossenen Community professioneller Tipster. Keine Anfänger.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>SECURE API</h3>
+                <p>End-to-End verschlüsselt. Keine Datenleaks. Privacy by design.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>NO BULLSHIT</h3>
+                <p>Keine leeren Versprechungen. Nur nachweisbare Ergebnisse.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- STATS -->
+    <section class="section container">
+        <h2>PERFORMANCE METRICS</h2>
+        <p>Zahlen lügen nicht. Hier sind unsere.</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Genauigkeit Live</div>
+            </div>
+            
+            <div class="stat">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Aktive Nutzer</div>
+            </div>
+            
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+            
+            <div class="stat">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Ligen</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- PRICING -->
+    <section id="pricing" class="section container">
+        <h2>PRICING MATRIX</h2>
+        <p>Transparent. Einfach. Fair.</p>
+        
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>BASIC TIER</h3>
+                <div class="price-amount">0 CHF</div>
+                <div class="price-period">FOREVER FREE</div>
+                <ul style="list-style: none; margin: var(--spacing-md) 0;">
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ Basis-Prognosen</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ Live-Ergebnisse</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ Top 5 Ligen</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✗ KI-Analysen</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✗ Profit-Tracking</li>
+                </ul>
+                <a href="https://t.me/Aifussballprognose_bot" class="btn" style="width: 100%; text-align: center;">
+                    START FREE
+                </a>
+            </div>
+            
+            <div class="price-card featured">
+                <h3>PRO TIER</h3>
+                <div class="price-amount">99 CHF</div>
+                <div class="price-period">12 MONATE (8.25/MONAT)</div>
+                <ul style="list-style: none; margin: var(--spacing-md) 0;">
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ ALL Basic Features</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ Erweiterte KI</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ Profit-Tracking</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ Expert Community</li>
+                    <li style="margin-bottom: var(--spacing-xs); color: var(--gray-60);">✓ Alle Ligen weltweit</li>
+                </ul>
+                <a href="https://t.me/Aifussballprognose_bot" class="btn btn-telegram" style="width: 100%; text-align: center;">
+                    UPGRADE NOW
+                </a>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: var(--spacing-md); color: var(--gray-60); font-size: 0.9rem;">
+            <span style="color: var(--accent);">✓</span> 30-Tage Geld-zurück-Garantie
+            <span style="margin: 0 var(--spacing-sm);">|</span>
+            <span style="color: var(--accent);">✓</span> Sichere Zahlung
+            <span style="margin: 0 var(--spacing-sm);">|</span>
+            <span style="color: var(--accent);">✓</span> Kein Abo
+        </p>
+    </section>
+    
+    <!-- CTA -->
+    <section class="section container" style="text-align: center;">
+        <h2>READY TO EXECUTE?</h2>
+        <p style="margin-bottom: var(--spacing-lg); max-width: 600px; margin-left: auto; margin-right: auto;">
+            Schließe dich 10.000+ Nutzern an, die keine Zeit für Marketing-Blabla haben.
+        </p>
+        
+        <a href="https://t.me/Aifussballprognose_bot" class="btn btn-telegram btn-large" target="_blank" rel="noopener" style="padding: var(--spacing-md) var(--spacing-lg); font-size: 1.2rem;">
+            LAUNCH BOT
+        </a>
+        
+        <div style="margin-top: var(--spacing-md);">
+            <div class="terminal-command" style="font-size: 0.9rem;">
+                curl -X POST https://t.me/Aifussballprognose_bot
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="container">
+        <p>AI FUSSBALL PROGNOSE | TERMINAL MODE v1.0</p>
+        <p style="color: var(--gray-60); margin-top: var(--spacing-xs);">
+            Kein Bling. Nur Daten. Seit 2024.
+        </p>
+        
+        <div class="footer-links">
+            <a href="#features">Specs</a>
+            <a href="#pricing">Pricing</a>
+            <a href="https://t.me/Aifussballprognose_bot" target="_blank" rel="noopener">Bot</a>
+            <a href="mailto:admin@aifussballprognose.com">Contact</a>
+        </div>
+        
+        <p style="margin-top: var(--spacing-md); color: var(--gray-60); font-size: 0.8rem;">
+            &copy; 2024 AI Fußball Prognose. Alle Rechte vorbehalten. Made with &lt;3 and data.
+        </p>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Blinking cursor
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.cursor');
+            if (cursor) {
+                setInterval(() => {
+                    cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+                }, 500);
+            }
+            
+            // Terminal command typing effect
+            const commands = document.querySelectorAll('.terminal-command');
+            commands.forEach(cmd => {
+                const text = cmd.textContent;
+                cmd.textContent = '';
+                let i = 0;
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        cmd.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                };
+                // Start typing after a delay
+                setTimeout(typeWriter, 1000);
+            });
+            
+            // Scroll indicator
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 100) {
+                        scrollIndicator.style.opacity = '0';
+                        scrollIndicator.style.pointerEvents = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
