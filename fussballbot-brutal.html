@@ -146,18 +146,18 @@
             right: 0;
             bottom: 0;
             background: 
-                /* Stadion-Foto mit starkem Kontrast */
-                url('https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2'),
+                /* Stadion-Foto als Base64 (keine CORS Probleme) */
+                url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAlACUDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='),
                 /* Dark Overlay für Lesbarkeit */
-                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)),
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
                 /* Terminal Grid Pattern */
                 linear-gradient(45deg, transparent 49%, var(--accent-glow) 50%, transparent 51%),
                 linear-gradient(-45deg, transparent 49%, var(--accent-glow) 50%, transparent 51%);
             background-size: cover, cover, 20px 20px, 20px 20px;
             background-blend-mode: overlay, normal, normal, normal;
-            opacity: 0.4;
+            opacity: 0.7;
             pointer-events: none;
-            filter: contrast(1.2) grayscale(0.8);
+            filter: contrast(1.5) grayscale(0.5);
         }
         
         .hero-content {
@@ -250,14 +250,14 @@
             right: 0;
             bottom: 0;
             background: 
-                url('https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2'),
-                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
+                url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAlACUDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='),
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
             background-size: cover;
             background-position: center;
             background-blend-mode: overlay;
-            opacity: 0.1;
+            opacity: 0.15;
             z-index: -1;
-            filter: grayscale(1) contrast(1.5);
+            filter: grayscale(1) contrast(1.8);
             transition: opacity 0.3s;
         }
         
@@ -379,14 +379,14 @@
             right: 0;
             bottom: 0;
             background: 
-                url('https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=1920&h=400&dpr=2'),
-                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95));
+                url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAlACUDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='),
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95));
             background-size: cover;
             background-position: center top;
             background-blend-mode: overlay;
-            opacity: 0.2;
+            opacity: 0.3;
             z-index: -1;
-            filter: contrast(1.5) grayscale(1) brightness(0.3);
+            filter: contrast(1.8) grayscale(1) brightness(0.4);
         }
         
         .footer-links {
