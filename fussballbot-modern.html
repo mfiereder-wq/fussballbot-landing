@@ -247,6 +247,16 @@
             background-clip: text;
             line-height: 1;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 0 5px var(--primary-glow));
         }
         
         /* Features */
@@ -284,10 +294,12 @@
         }
         
         .feature-icon {
-            font-size: 3rem;
+            width: 80px;
+            height: 80px;
             margin-bottom: 1.5rem;
             display: block;
             filter: drop-shadow(0 0 10px var(--primary-glow));
+            object-fit: contain;
         }
         
         /* CTA Section */
@@ -537,19 +549,31 @@
             
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-number">95%</div>
+                    <div class="stat-number">
+                        <img src="https://img.icons8.com/3d-fluency/94/accuracy.png" alt="Genauigkeit Icon" class="stat-icon">
+                        95%
+                    </div>
                     <p>Genauigkeit bei Live-Ergebnissen</p>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">10K+</div>
+                    <div class="stat-number">
+                        <img src="https://img.icons8.com/3d-fluency/94/conference.png" alt="Nutzer Icon" class="stat-icon">
+                        10K+
+                    </div>
                     <p>Aktive Nutzer</p>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">24/7</div>
+                    <div class="stat-number">
+                        <img src="https://img.icons8.com/3d-fluency/94/24-hours.png" alt="24/7 Icon" class="stat-icon">
+                        24/7
+                    </div>
                     <p>Echtzeit-Updates</p>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">50+</div>
+                    <div class="stat-number">
+                        <img src="https://img.icons8.com/3d-fluency/94/trophy.png" alt="Ligen Icon" class="stat-icon">
+                        50+
+                    </div>
                     <p>Unterstützte Ligen</p>
                 </div>
             </div>
@@ -580,37 +604,37 @@
             
             <div class="features">
                 <article class="feature-card">
-                    <span class="feature-icon">🤖</span>
+                    <img src="https://img.icons8.com/3d-fluency/94/artificial-intelligence.png" alt="KI Icon" class="feature-icon">
                     <h3>KI-Prognose-Engine</h3>
                     <p>Maschinelles Lernen analysiert historische Daten, Teamform und Spielerbedingungen für präzise Spielausgänge.</p>
                 </article>
                 
                 <article class="feature-card">
-                    <span class="feature-icon">📊</span>
+                    <img src="https://img.icons8.com/3d-fluency/94/statistics.png" alt="Statistiken Icon" class="feature-icon">
                     <h3>Live-Data Dashboard</h3>
                     <p>Echtzeit-Statistiken, xG-Werte, Ballbesitz, Schüsse und detaillierte Spielanalysen aller Top-Ligen.</p>
                 </article>
                 
                 <article class="feature-card">
-                    <span class="feature-icon">🎯</span>
+                    <img src="https://img.icons8.com/3d-fluency/94/appointment-reminders.png" alt="Benachrichtigungen Icon" class="feature-icon">
                     <h3>Smart Notifications</h3>
                     <p>Personalisierte Benachrichtigungen für Tore, Karten, Verletzungen und wichtige Spielereignisse.</p>
                 </article>
                 
                 <article class="feature-card">
-                    <span class="feature-icon">📈</span>
+                    <img src="https://img.icons8.com/3d-fluency/94/growth--v1.png" alt="Wachstum Icon" class="feature-icon">
                     <h3>Profit-Tracking</h3>
                     <p>Verfolge deine Tipp-Performance mit detaillierten Statistiken und ROI-Berechnungen.</p>
                 </article>
                 
                 <article class="feature-card">
-                    <span class="feature-icon">👥</span>
+                    <img src="https://img.icons8.com/3d-fluency/94/conference-call.png" alt="Community Icon" class="feature-icon">
                     <h3>Expert-Community</h3>
                     <p>Tausche dich mit professionellen Tipstern aus und lerne von den Besten der Community.</p>
                 </article>
                 
                 <article class="feature-card">
-                    <span class="feature-icon">🔒</span>
+                    <img src="https://img.icons8.com/3d-fluency/94/security-lock.png" alt="Sicherheit Icon" class="feature-icon">
                     <h3>Sichere Transaktionen</h3>
                     <p>Verschlüsselte Zahlungen und transparente Abrechnung für Premium-Inhalte.</p>
                 </article>
@@ -633,7 +657,10 @@
             </div>
             
             <div id="setup" style="margin-top: 4rem;">
-                <h3 style="text-align: center; margin-bottom: 2rem;">📱 In 3 Schritten zum Profi</h3>
+                <h3 style="text-align: center; margin-bottom: 2rem;">
+                    <img src="https://img.icons8.com/3d-fluency/94/smartphone-tablet.png" alt="Smartphone Icon" style="width: 40px; height: 40px; vertical-align: middle; margin-right: 10px; filter: drop-shadow(0 0 5px var(--primary-glow));">
+                    In 3 Schritten zum Profi
+                </h3>
                 
                 <div class="setup-steps">
                     <div class="step">
