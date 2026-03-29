@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FussballBot Analytics Setup</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0f0;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #0f0;
+            border-bottom: 2px solid #0f0;
+            padding-bottom: 0.5rem;
+        }
+        .container {
+            background: #111;
+            padding: 2rem;
+            border: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+        .code {
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            border: 1px solid #333;
+            overflow-x: auto;
+            font-family: monospace;
+            margin: 1rem 0;
+        }
+        .step {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-left: 4px solid #0f0;
+            background: #1a1a1a;
+        }
+        .important {
+            color: #ff5555;
+            font-weight: bold;
+        }
+        .success {
+            color: #00ff88;
+        }
+        a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .button {
+            display: inline-block;
+            background: #00ff88;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border: none;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0.5rem 0;
+        }
+        .button:hover {
+            background: #00cc66;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 FUSSBALLBOT ANALYTICS SETUP</h1>
+    
+    <div class="container">
+        <h2>🚀 SCHNELLSTART</h2>
+        
+        <div class="step">
+            <h3>1. Google Analytics 4 erstellen</h3>
+            <a href="https://analytics.google.com/" target="_blank" class="button">GA4 öffnen</a>
+            <p>→ Konto erstellen → Property: "fussballbot.qzz.io"</p>
+        </div>
+        
+        <div class="step">
+            <h3>2. Google Tag Manager erstellen</h3>
+            <a href="https://tagmanager.google.com/" target="_blank" class="button">GTM öffnen</a>
+            <p>→ Container: "fussballbot.qzz.io" → Web</p>
+        </div>
+        
+        <div class="step">
+            <h3>3. IDs kopieren</h3>
+            <div class="code">
+                GA4: G-XXXXXXXXXX<br>
+                GTM: GTM-XXXXXXX
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>4. In HTML eintragen</h3>
+            <p>Öffne <code>fussballbot-brutal.html</code> und ersetze:</p>
+            <div class="code">
+                // Suche nach:
+                G-XXXXXXXXXX → Ersetze mit deiner GA4 ID<br>
+                GTM-XXXXXXX → Ersetze mit deiner GTM ID
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>5. Live schalten</h3>
+            <div class="code">
+                git add fussballbot-brutal.html<br>
+                git commit -m "Add Analytics"<br>
+                git push origin main
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>🔧 TECHNISCHE IMPLEMENTATION</h2>
+        
+        <h3>Automatisch getrackte Events:</h3>
+        <div class="code">
+            1. telegram_click - Telegram Button Klicks<br>
+            2. premium_click - Premium Button Klicks (99 CHF)<br>
+            3. scroll_25/50/75/90 - Scroll-Tiefe<br>
+            4. page_view - Alle Seitenaufrufe
+        </div>
+        
+        <h3>Conversion Goals in GA4:</h3>
+        <div class="code">
+            • Telegram Engagement<br>
+            • Premium Conversion<br>
+            • Content Engagement (90% Scroll)
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>📈 DASHBOARD EINRICHTUNG</h2>
+        
+        <div class="step">
+            <h3>GA4 Berichte konfigurieren:</h3>
+            <p>1. <strong>Echtzeit</strong> - Aktive Nutzer</p>
+            <p>2. <strong>Engagement</strong> - Seitenaufrufe, Verweildauer</p>
+            <p>3. <strong>Monetarisierung</strong> - Premium Conversions</p>
+            <p>4. <strong>Nutzer</strong> - Demografie, Geräte, Standorte</p>
+        </div>
+        
+        <div class="step">
+            <h3>Conversion Funnel:</h3>
+            <div class="code">
+                Landing Page → Scroll 50% → Telegram Click → Premium Click
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>🚨 FEHLERBEHEBUNG</h2>
+        
+        <div class="step">
+            <h3>Analytics nicht sichtbar?</h3>
+            <p>1. Chrome DevTools öffnen (F12)</p>
+            <p>2. In Console prüfen:</p>
+            <div class="code">
+                console.log('GA4 loaded:', typeof gtag !== 'undefined');
+            </div>
+            <p>3. 24-48 Stunden warten für erste Daten</p>
+        </div>
+        
+        <div class="step">
+            <h3>GTM Preview Mode:</h3>
+            <a href="https://tagmanager.google.com/#/container/" target="_blank" class="button">GTM Preview</a>
+            <p>→ Tags debuggen → Events prüfen</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>🔗 LINKS & RESOURCES</h2>
+        
+        <div class="step">
+            <h3>Quick Links:</h3>
+            <p><a href="https://analytics.google.com/analytics/web/" target="_blank">📊 GA4 Dashboard</a></p>
+            <p><a href="https://tagmanager.google.com/" target="_blank">🔧 GTM Dashboard</a></p>
+            <p><a href="https://search.google.com/search-console" target="_blank">🔍 Search Console</a></p>
+            <p><a href="https://github.com/mfiereder-wq/fussballbot-landing" target="_blank">💾 GitHub Repo</a></p>
+            <p><a href="https://fussballbot.qzz.io/fussballbot-brutal.html" target="_blank">🌐 Live Site</a></p>
+        </div>
+    </div>
+    
+    <div class="container success">
+        <h2>✅ FERTIG!</h2>
+        <p><strong>Deine Analytics sind implementiert!</strong></p>
+        <p>Erwartete Metriken (erste 24h):</p>
+        <div class="code">
+            • 50-100 Seitenaufrufe<br>
+            • 2-5% Telegram Click Rate<br>
+            • 60-80% erreichen 50% Scroll-Tiefe
+        </div>
+        <p class="important">🚀 Viel Erfolg mit deinem FussballBot!</p>
+    </div>
+    
+    <script>
+        // Demo Analytics Events
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('📊 Analytics Event: button_click - ' + this.textContent);
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'demo_click', {
+                        'event_category': 'demo',
+                        'event_label': this.textContent
+                    });
+                }
+            });
+        });
+        
+        // Scroll Tracking Demo
+        window.addEventListener('scroll', function() {
+            var scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            console.log('📊 Scroll: ' + Math.round(scrollPercent) + '%');
+        });
+    </script>
+</body>
+</html>

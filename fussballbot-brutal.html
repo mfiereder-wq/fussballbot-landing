@@ -18,6 +18,26 @@
     <meta name="twitter:description" content="@Aifussballprognose_bot - KI-Prognosen direkt in Telegram. 95% Genauigkeit. 99 CHF/Jahr.">
     <meta name="twitter:image" content="https://i.ibb.co/1NxkgBm/1774735167194.png">
     
+    <!-- Google Analytics 4 -->
+    <!-- ERSTELLE EIN GA4 PROPERTY UNTER: https://analytics.google.com/ -->
+    <!-- Property ID: G-XXXXXXXXXX -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Google Tag Manager -->
+    <!-- ERSTELLE EIN GTM CONTAINER UNTER: https://tagmanager.google.com/ -->
+    <!-- Container ID: GTM-XXXXXXX -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    
     <!-- Critical CSS -->
     <style>
         /* RESET */
@@ -704,7 +724,60 @@
                     }
                 });
             }
+            
+            // Analytics Event Tracking
+            // Telegram Button Tracking
+            document.querySelectorAll('a[href*="t.me/Aifussballprognose_bot"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'telegram_click', {
+                            'event_category': 'engagement',
+                            'event_label': 'Telegram Bot Link',
+                            'value': 1
+                        });
+                    }
+                });
+            });
+            
+            // Premium Button Tracking
+            document.querySelectorAll('a[href*="#pricing"], button').forEach(button => {
+                if (button.textContent.includes('PREMIUM') || button.textContent.includes('Premium') || button.textContent.includes('99 CHF')) {
+                    button.addEventListener('click', function() {
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'premium_click', {
+                                'event_category': 'conversion',
+                                'event_label': 'Premium Pricing Click',
+                                'value': 99
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // Scroll Depth Tracking
+            window.addEventListener('scroll', function() {
+                if (typeof gtag !== 'undefined') {
+                    var scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                    
+                    if (scrollPercent > 25) gtag('event', 'scroll_25');
+                    if (scrollPercent > 50) gtag('event', 'scroll_50');
+                    if (scrollPercent > 75) gtag('event', 'scroll_75');
+                    if (scrollPercent > 90) gtag('event', 'scroll_90');
+                }
+            });
+            
+            // Page View Tracking
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': document.title,
+                    'page_location': window.location.href,
+                    'page_path': window.location.pathname
+                });
+            }
         });
     </script>
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body>
 </html>
